@@ -1,0 +1,21 @@
+.component-li {
+	background: #fff;
+	cursor: pointer;
+	display: flex;
+	padding: 1ch;
+	border-bottom: 1px solid #eee;
+}
+
+.component-li:hover {
+	background-color: #eee;
+}
+
+.component-li .component-li-author {
+	color: #999;
+	font-size: 0.8em;
+	padding-left: 4ch;
+}
+
+.component-li:hover .component-li-author {
+	color: #000;
+}
