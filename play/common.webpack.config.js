@@ -20,7 +20,10 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
   module: {
     rules: [
-      {test: /\.(eot|gif|html|png|svg|ttf|woff|woff2)$/, use: 'file-loader'},
+      {
+        test: /\.(eot|gif|html|jpg|png|svg|ttf|woff|woff2)$/,
+        use: 'file-loader',
+      },
     ],
   },
   node: {__dirname: false},
