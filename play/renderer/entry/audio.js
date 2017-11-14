@@ -27,7 +27,7 @@ export default class {
     this.Body = {
       view: () => {
         return m('div', {
-          style: {height: '100%', width: '100%'},
+          style: {background: '#000', height: '100%', width: '100%'},
 
           oncreate: ({dom}) => {
             const context = new AudioContext;
@@ -54,19 +54,7 @@ export default class {
 
             const {view} = this._canvas.getRenderer();
 
-            this._listenResizeEvent = () => {
-              console.log('resize');
-              view.style.width = dom.offsetWidth + 'px';
-              view.style.height = dom.offsetHeight + 'px';
-            };
-
-            addEventListener('resize', this._listenResizeEvent);
-
-            view.style.objectFit = 'contain';
-            view.style.position = 'absolute';
-            view.style.width = dom.offsetWidth + 'px';
-            view.style.height = dom.offsetHeight + 'px';
-            view.style.zIndex = '-1';
+            view.style = 'object-fit: contain; width: 100%; height: 100%';
             dom.appendChild(view);
           },
 
@@ -74,64 +62,68 @@ export default class {
             this._canvas.stop();
             this._canvas.destroy();
             this._canvas = null;
-
-            removeEventListener('resize', this._listenResizeEvent);
           },
         });
       },
     };
 
     this.Controls = {
-      view: () => {
-        return m('audio', {
-          controls: true,
-          src,
-          style: {width: '100%'},
-          oncreate: ({dom}) => {
-            this._audio = dom;
+      view: ({attrs}) => {
+        return m('div', {style: {display: 'flex'}},
+          m('audio', {
+            controls: true,
+            src,
+            style: {width: '100%'},
+            oncreate: ({dom}) => {
+              this._audio = dom;
 
-            if (this._canvas) {
-              const {audioAnalyserNode} = this._canvas;
-              const {context} = audioAnalyserNode;
+              if (this._canvas) {
+                const {audioAnalyserNode} = this._canvas;
+                const {context} = audioAnalyserNode;
 
-              context.createMediaElementSource(dom).connect(audioAnalyserNode);
-            }
+                context.createMediaElementSource(dom).connect(audioAnalyserNode);
+              }
 
-            this._audio.play();
-          },
-          onremove: () => {
-            this._audio.pause();
-            this._audio = null;
-          },
-          onplaying: () => {
-            if (this._canvas) {
-              this._canvas.stop();
-              this._canvas.start();
-            }
-          },
-          onpause: () => {
-            if (this._canvas) {
-              this._canvas.stop();
-            }
-          },
-          onseeking: () => {
-            if (this._canvas) {
-              this._canvas.stop();
-              this._canvas.initialize();
-            }
-          },
-          onseeked: () => {
-            if (this._canvas) {
-              this._canvas.stop();
-              this._canvas.start();
-            }
-          },
-          onwaiting: () => {
-            if (this._canvas) {
-              this._canvas.stop();
-            }
-          },
-        });
+              this._audio.play();
+            },
+            onremove: () => {
+              this._audio.pause();
+              this._audio = null;
+            },
+            onplaying: () => {
+              if (this._canvas) {
+                this._canvas.stop();
+                this._canvas.start();
+              }
+            },
+            onpause: () => {
+              if (this._canvas) {
+                this._canvas.stop();
+              }
+            },
+            onseeking: () => {
+              if (this._canvas) {
+                this._canvas.stop();
+                this._canvas.initialize();
+              }
+            },
+            onseeked: () => {
+              if (this._canvas) {
+                this._canvas.stop();
+                this._canvas.start();
+              }
+            },
+            onwaiting: () => {
+              if (this._canvas) {
+                this._canvas.stop();
+              }
+            },
+          }),
+          m('button', {
+            className: 'material-icons',
+            style: { background: '#fff', border: '0' },
+            onclick: attrs.onfullscreentoggle,
+          }, attrs.fullscreen ? 'fullscreen_exit' : 'fullscreen'));
       },
     };
 

@@ -21,9 +21,24 @@ import 'material-design-icons/iconfont/material-icons.css';
 import './index.css';
 
 export default {
-  oninit() {
+  oninit(node) {
     this.directory = directory;
     this.entry = directory;
+
+    this.listenFullscreenchange = () => {
+      this.fullscreen = node.dom && document.webkitFullscreenElement == node.dom;
+      m.redraw();
+    }
+  },
+
+  oncreate() {
+    document.addEventListener('webkitfullscreenchange',
+                              this.listenFullscreenchange);
+  },
+
+  onbeforeremove() {
+    document.removeEventListener('webkitfullscreenchange',
+                                 this.listenFullscreenchange);
   },
 
   select(entry) {
@@ -49,17 +64,36 @@ export default {
     }
   },
 
+  toggleFullscreen({ dom }) {
+    if (this.fullscreen) {
+      document.webkitExitFullscreen();
+    } else {
+      dom.webkitRequestFullscreen();
+    }
+  },
+
   up() {
     this.directory = this.parent.directory;
     this.parent = this.parent.parent;
     this.entry = this.directory;
   },
 
-  view() {
-    return m('div',
-      {style: {display: 'flex', flexDirection: 'column', height: '100%'}},
+  view(node) {
+    const entryAttrs = {
+      fullscreen: this.fullscreen,
+      onfullscreentoggle: this.toggleFullscreen.bind(this, node),
+    };
+
+    return m('div', {
+      style: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
+      },
+    },
       m('div', {style: {display: 'flex', flex: '1'}},
-        m('ul', {
+        this.fullscreen ? null : m('ul', {
           style: {
             background: '#f8f8f8',
             margin: '0',
@@ -84,7 +118,32 @@ export default {
               m('div', {style: {paddingLeft: '1ch'}},
                 m('div', entry.title),
                 m('div', {className: 'component-li-author'}, entry.author))))),
-        m('main', {style: {flex: '1'}}, m(this.entry.Body))),
-      m('div', {style: {borderTop: '1px solid #eee'}}, m(this.entry.Controls)));
+        m('main', {
+          onmousemove: () => {
+            if (this.fullscreen) {
+              this.controls.style.transition = '';
+              this.controls.style.maxHeight = '32px';
+
+              this.controls.offsetHeight; // triggers reflow
+
+              this.controls.style.transition = 'max-height 1s 4s';
+              this.controls.style.maxHeight = '0';
+            }
+          },
+          style: {flex: '1'},
+        }, m(this.entry.Body, entryAttrs))),
+      m('div', {
+        style: this.fullscreen ? {
+          borderTop: '0',
+          maxHeight: '0',
+          transition: 'max-height 1s 4s',
+        } : {
+          borderTop: '1px solid #eee',
+          maxHeight: '32px',
+        },
+        oncreate: ({ dom }) => {
+          this.controls = dom;
+        },
+      }, m(this.entry.Controls, entryAttrs)));
   },
 };
