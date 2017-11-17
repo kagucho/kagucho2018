@@ -51,7 +51,7 @@ class DirectoryEntry {
 
 DirectoryEntry.prototype.Controls = {
   view() {
-    return m('p', {style: {display: 'flex', margin: '1ch'}},
+    return m('p', {style: {flex: '0', display: 'flex', margin: '0'}},
       m('i', {className: 'material-icons', style: {marginRight: '0.1ch'}},
         'info_outline'),
       '項目を選択してください');
