@@ -24,6 +24,7 @@ import 'photoswipe/dist/default-skin/default-skin.css';
 import './index.css';
 
 const childProcess = require('child_process');
+const path = require('path');
 
 class ExecutableEntry {
   constructor({title, author, description, photos, src}) {
@@ -47,7 +48,7 @@ class ExecutableEntry {
           m('button', {
             className: 'entry-executable-button',
             onclick() {
-              childProcess.spawn(src, {detached: true})
+              childProcess.spawn(src, {cwd: path.dirname(src), detached: true})
                 .on('error', (error) => alert(`${title}の起動に失敗しました。
 ${error}`));
             },
