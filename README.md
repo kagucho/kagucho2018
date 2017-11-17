@@ -50,6 +50,19 @@ npm start
 
 Enjoy.
 
+## How to Deploy in msys2
+
+1. install msys2
+2. pacman -S base_devel git rsync zip unzip
+3. git clone https://github.com/yumetodo/kagucho2017.git
+4. cd kagucho2017
+5. git checkout -b deploy2017 origin/deploy2017
+6. npm i
+7. ./play/renderer/directory.jsを編集、みんなの音楽とゲームを呼び出す情報を書く
+8. make
+9. outputディレクトリにkagucho2017.zipができる
+10. みんなに配る
+
 ## Other Makefile targets
 
 ### distclean
