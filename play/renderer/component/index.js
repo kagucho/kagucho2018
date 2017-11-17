@@ -96,9 +96,10 @@ export default {
         this.fullscreen ? null : m('ul', {
           style: {
             background: '#f8f8f8',
-            margin: '0',
             borderRight: '1px solid #eee',
             listStyleType: 'none',
+            margin: '0',
+            overflowY: 'scroll',
             padding: '0',
             width: '32ch',
           },
