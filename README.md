@@ -53,7 +53,7 @@ Enjoy.
 ## How to Deploy in msys2
 
 1. install msys2
-2. pacman -S base_devel git rsync zip unzip
+2. pacman -S base-devel git rsync zip unzip
 3. git clone https://github.com/yumetodo/kagucho2017.git
 4. cd kagucho2017
 5. git checkout -b deploy2017 origin/deploy2017
