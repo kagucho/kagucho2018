@@ -33,7 +33,7 @@ lint-node: ./node_modules/.bin/eslint node.eslintrc.json node.eslintignore
 watch:
 	cd play/main && $(abspath ./node_modules/.bin/webpack) --watch & cd play/renderer && $(abspath ./node_modules/.bin/webpack) --watch
 
-target-kagucho2017: kagucho2017
+target-kagucho2017: blob/kagucho2017
 	mkdir -p output
 	rsync -r $< output
 

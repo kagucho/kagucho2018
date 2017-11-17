@@ -15,7 +15,7 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import directory from '../directory';
+import directory from '../../../blob/directory';
 import m from 'mithril';
 import 'material-design-icons/iconfont/material-icons.css';
 import './index.css';
