@@ -19,7 +19,12 @@ import image0 from './IMG_20170531_115202.jpg';
 import image1 from './IMG_20170531_133446.jpg';
 import image2 from './IMG_20170624_152953.jpg';
 import image3 from './IMG_20170702_131522.jpg';
-import image4 from './logo250c.png';
+import image4 from './IMG_20170702_131717.jpg';
+import image5 from './IMG_20170702_132622.jpg';
+import image6 from './IMG_20170702_133536.jpg';
+import image7 from './IMG_20170702_133927.jpg';
+import image8 from './IMG_20170702_135922.jpg';
+import image9 from './logo250c.png';
 
 const path = require('path');
 const presets = [];
@@ -29,7 +34,12 @@ const presets = [];
   {image: image1, color: 0xfffdc1},
   {image: image2, color: 0xe6e4de},
   {image: image3, color: 0xe3ff96},
-  {image: image4, color: 0xffffff},
+  {image: image4, color: 0xffd2ff},
+  {image: image5, color: 0xf8c7b8},
+  {image: image6, color: 0xf8b492},
+  {image: image7, color: 0xeffefb},
+  {image: image8, color: 0xfff2d8},
+  {image: image9, color: 0xffffff},
 ].forEach(({image, color }) => {
   const imagePath = path.join('renderer', image);
 
