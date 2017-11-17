@@ -79,13 +79,17 @@ ${error}`));
               },
             }, 'スクリーンショット')),
           {
-            description: m('p', {
+            description: m('iframe', {
+              src: description,
               style: {
                 borderTop: '1px solid #38b',
-                margin: '0',
-                padding: '1ch',
+                borderLeft: '0',
+                borderRight: '0',
+                borderBottom: '0',
+                width: '100%',
+                height: '100%',
               },
-            }, description),
+            }),
             photos: m('div', {
               style: {
                 borderTop: '1px solid #38b',
