@@ -13,8 +13,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-output/kagucho2017.iso: target-kagucho2017 target-play output/kagucho2017/win32-x64
-	mkisofs -J -V KAGUCHO2017 -copyright COPYRIGHT.TXT -abstract ABSTRACT.TXT -o $@ -udf output/kagucho2017
+# output/kagucho2017.iso: target-kagucho2017 target-play output/kagucho2017/win32-x64
+# 	mkisofs -J -V KAGUCHO2017 -copyright COPYRIGHT.TXT -abstract ABSTRACT.TXT -o $@ -udf output/kagucho2017
+output/kagucho2017.zip: target-kagucho2017 target-play output/kagucho2017/win32-x64
+	zip -r output/kagucho2017.zip output/kagucho2017
 
 clean:
 	rm -rf output/kagucho2017 output/kagucho2017.iso
