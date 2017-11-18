@@ -21,7 +21,7 @@
     "electron": "^1.7.9",
     "material-design-icons": "^3.0.1",
     "mithril": "^1.1.5",
-    "musicvideo-generator": "git+https://github.com/pixiv/musicvideo-generator.git#v1.4.3",
+    "musicvideo-generator": "git+https://github.com/pixiv/musicvideo-generator.git#v1.4.7",
     "photoswipe": "^4.1.2"
   },
   "devDependencies": {
