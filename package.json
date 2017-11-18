@@ -1,6 +1,6 @@
 {
   "name": "play-kagucho",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A player of Kagucho's works",
   "main": "kagucho2017/play/main/index.js",
   "scripts": {
