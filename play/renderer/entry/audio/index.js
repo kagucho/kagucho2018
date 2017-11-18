@@ -61,6 +61,7 @@ export default class {
 
           onremove: () => {
             this._canvas.stop();
+            this._canvas.audioAnalyserNode.context.close();
             this._canvas.destroy();
             this._canvas = null;
           },
