@@ -26,9 +26,11 @@ export default {
     this.entry = directory;
 
     this.listenFullscreenchange = () => {
-      this.fullscreen = node.dom && document.webkitFullscreenElement == node.dom;
+      this.fullscreen = node.dom &&
+                          document.webkitFullscreenElement == node.dom;
+
       m.redraw();
-    }
+    };
   },
 
   oncreate() {
@@ -64,7 +66,7 @@ export default {
     }
   },
 
-  toggleFullscreen({ dom }) {
+  toggleFullscreen({dom}) {
     if (this.fullscreen) {
       document.webkitExitFullscreen();
     } else {
@@ -142,9 +144,7 @@ export default {
           borderTop: '1px solid #eee',
           maxHeight: '32px',
         },
-        oncreate: ({ dom }) => {
-          this.controls = dom;
-        },
+        oncreate: ({dom}) => this.controls = dom,
       }, m(this.entry.Controls, entryAttrs)));
   },
 };

@@ -40,11 +40,11 @@ const presets = [];
   {image: image7, color: 0xeffefb},
   {image: image8, color: 0xfff2d8},
   {image: image9, color: 0xffffff},
-].forEach(({image, color }) => {
+].forEach(({image, color}) => {
   const imagePath = path.join('renderer', image);
 
   for (const mode of [0, 1, 3]) {
-    presets.push({image: imagePath, spectrum: { color, mode }});
+    presets.push({image: imagePath, spectrum: {color, mode}});
   }
 });
 

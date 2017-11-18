@@ -29,7 +29,7 @@ export default class {
         return m(Visualiser, {
           getCurrentTime: () => this._audio ? this._audio.currentTime : 0,
 
-          onCanvasCreate: canvas => {
+          onCanvasCreate: (canvas) => {
             const {audioAnalyserNode} = canvas;
 
             this._canvas = canvas;
@@ -62,9 +62,10 @@ export default class {
 
               if (this._canvas) {
                 const {audioAnalyserNode} = this._canvas;
-                const {context} = audioAnalyserNode;
 
-                context.createMediaElementSource(dom).connect(audioAnalyserNode);
+                audioAnalyserNode.context
+                                 .createMediaElementSource(dom)
+                                 .connect(audioAnalyserNode);
               }
 
               this._audio.play();
@@ -104,7 +105,7 @@ export default class {
           }),
           m('button', {
             className: 'material-icons',
-            style: { background: '#fff', border: '0' },
+            style: {background: '#fff', border: '0'},
             onclick: attrs.onfullscreentoggle,
           }, attrs.fullscreen ? 'fullscreen_exit' : 'fullscreen'));
       },

@@ -66,7 +66,9 @@ export default {
 
         const {view} = this.canvas.getRenderer();
 
-        view.style = 'background: #000; object-fit: contain; width: 100%; height: 100%';
+        view.style =
+          'background: #000; object-fit: contain; width: 100%; height: 100%';
+
         dom.appendChild(view);
 
         attrs.onCanvasCreate(this.canvas);

@@ -19,7 +19,7 @@ import Visualiser from './visualiser';
 import m from 'mithril';
 
 export default class {
-  constructor({ title, author }) {
+  constructor({title, author}) {
     this.title = title;
     this.author = author;
 
@@ -33,8 +33,8 @@ export default class {
           onCanvasCreate(canvas) {
             navigator.mediaDevices.getUserMedia({
               audio: {mandatory: {chromeMediaSource: 'desktop'}},
-              video: {mandatory: { chromeMediaSource: 'desktop'}},
-            }).then(stream => {
+              video: {mandatory: {chromeMediaSource: 'desktop'}},
+            }).then((stream) => {
               const {audioAnalyserNode} = canvas;
 
               audioAnalyserNode.context
@@ -42,7 +42,7 @@ export default class {
                                .connect(audioAnalyserNode);
 
               canvas.start();
-            }).catch(error => alert(`音声の取得に失敗しました。
+            }).catch((error) => alert(`音声の取得に失敗しました。
 ${error}`));
           },
         });
@@ -58,7 +58,7 @@ ${error}`));
            'デスクトップ上に流れている音声を可視化します。'),
           m('button', {
             className: 'material-icons',
-            style: { background: '#fff', border: '0' },
+            style: {background: '#fff', border: '0'},
             onclick: attrs.onfullscreentoggle,
           }, attrs.fullscreen ? 'fullscreen_exit' : 'fullscreen'));
       },
