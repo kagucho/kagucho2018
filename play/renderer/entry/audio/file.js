@@ -15,9 +15,8 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import MusicvideoGenerator from 'musicvideo-generator/lib/index_browser';
 import m from 'mithril';
-import preset from './preset';
+import Visualiser from './visualiser';
 import 'material-design-icons/iconfont/material-icons.css';
 
 export default class {
@@ -25,58 +24,28 @@ export default class {
     this.title = title;
     this.author = author;
 
-    function generateParams() {
-      return Object.assign({
-        backgroundColor: 0,
-        image: null,
-        resolution: {width: 1280, height: 720},
-        spectrum: {color: 0xffffff, mode: 1},
-        text: {color: 0xffffff, title, sub: author},
-      }, preset[Math.floor(Math.random() * preset.length)]);
-    }
-
     this.Body = {
       view: () => {
-        return m('div', {
-          style: {cursor: 'pointer', height: '100%', width: '100%'},
+        return m(Visualiser, {
+          getCurrentTime: () => this._audio ? this._audio.currentTime : 0,
 
-          onclick: () => {
-            this._canvas.changeParams(generateParams());
-          },
+          onCanvasCreate: canvas => {
+            const {audioAnalyserNode} = canvas;
 
-          oncreate: ({dom}) => {
-            const context = new AudioContext;
-
-            this._canvas = new MusicvideoGenerator.Canvas(
-              context,
-              generateParams(),
-              null,
-              () => this._audio ? this._audio.currentTime : 0);
-
-            this._canvas.audioAnalyserNode.connect(context.destination);
-            this._canvas.initialize();
+            this._canvas = canvas;
 
             if (this._audio) {
-              context.createMediaElementSource(dom)
-                     .connect(this._canvas.audioAnalyserNode);
+              audioAnalyserNode.createMediaElementSource(dom)
+                               .connect(audioAnalyserNode);
 
               if (!this._audio.paused) {
-                this._canvas.start();
+                canvas.start();
               }
             }
-
-            const {view} = this._canvas.getRenderer();
-
-            view.style = 'background: #000; object-fit: contain; width: 100%; height: 100%';
-            dom.appendChild(view);
           },
 
-          onremove: () => {
-            this._canvas.stop();
-            this._canvas.audioAnalyserNode.context.close();
-            this._canvas.destroy();
-            this._canvas = null;
-          },
+          title,
+          sub: author,
         });
       },
     };
