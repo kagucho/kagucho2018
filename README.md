@@ -49,14 +49,23 @@ the player.
 
 Besides Node.js modules, you can use following modules:
 
-###### `../play/renderer/entry/audio`
+###### `../play/renderer/entry/audio/file`
 
-This is a constructor of audio entry. The first argument is an object with
+This is a constructor of audio file entry. The first argument is an object with
 following properties:
 
 * `title` in string
 * `author` in string (optional)
 * `src` as absolute path to audio file in string
+
+###### `../play/renderer/entry/audio/user_media`
+
+This is a constructor of audio user media entry. The first argument is an object
+with following properties:
+
+* `title` in string
+* `author` in string (optional)
+* `constraints`
 
 ###### `../play/renderer/entry/executable`
 

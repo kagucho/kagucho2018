@@ -19,7 +19,7 @@ import Visualiser from './visualiser';
 import m from 'mithril';
 
 export default class {
-  constructor({title, author}) {
+  constructor({title, author, constraints}) {
     this.title = title;
     this.author = author;
 
@@ -31,10 +31,7 @@ export default class {
           },
 
           onCanvasCreate(canvas) {
-            navigator.mediaDevices.getUserMedia({
-              audio: {mandatory: {chromeMediaSource: 'desktop'}},
-              video: {mandatory: {chromeMediaSource: 'desktop'}},
-            }).then((stream) => {
+            navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
               const {audioAnalyserNode} = canvas;
 
               audioAnalyserNode.context
@@ -55,7 +52,7 @@ ${error}`));
           m('p', {style: {display: 'flex', flex: '1', margin: '0'}},
             m('i', {className: 'material-icons', style: {marginRight: '0.1ch'}},
               'info_outline'),
-           'デスクトップ上に流れている音声を可視化します。'),
+           '音声を可視化します。'),
           m('button', {
             className: 'material-icons',
             style: {background: '#fff', border: '0'},
