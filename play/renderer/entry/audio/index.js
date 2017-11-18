@@ -28,7 +28,7 @@ export default class {
     this.Body = {
       view: () => {
         return m('div', {
-          style: {background: '#000', height: '100%', width: '100%'},
+          style: {height: '100%', width: '100%'},
 
           oncreate: ({dom}) => {
             const context = new AudioContext;
@@ -55,7 +55,7 @@ export default class {
 
             const {view} = this._canvas.getRenderer();
 
-            view.style = 'object-fit: contain; width: 100%; height: 100%';
+            view.style = 'background: #000; object-fit: contain; width: 100%; height: 100%';
             dom.appendChild(view);
           },
 
