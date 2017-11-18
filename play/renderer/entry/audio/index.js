@@ -25,21 +25,33 @@ export default class {
     this.title = title;
     this.author = author;
 
+    function generateParams() {
+      return Object.assign({
+        backgroundColor: 0,
+        image: null,
+        resolution: {width: 1280, height: 720},
+        spectrum: {color: 0xffffff, mode: 1},
+        text: {color: 0xffffff, title, sub: author},
+      }, preset[Math.floor(Math.random() * preset.length)]);
+    }
+
     this.Body = {
       view: () => {
         return m('div', {
-          style: {height: '100%', width: '100%'},
+          style: {cursor: 'pointer', height: '100%', width: '100%'},
+
+          onclick: () => {
+            this._canvas.changeParams(generateParams());
+          },
 
           oncreate: ({dom}) => {
             const context = new AudioContext;
 
-            this._canvas = new MusicvideoGenerator.Canvas(context, Object.assign({
-              backgroundColor: 0,
-              image: null,
-              resolution: {width: 1280, height: 720},
-              spectrum: {color: 0xffffff, mode: 1},
-              text: {color: 0xffffff, title, sub: author},
-            }, preset[Math.floor(Math.random() * preset.length)]), null, () => this._audio ? this._audio.currentTime : 0);
+            this._canvas = new MusicvideoGenerator.Canvas(
+              context,
+              generateParams(),
+              null,
+              () => this._audio ? this._audio.currentTime : 0);
 
             this._canvas.audioAnalyserNode.connect(context.destination);
             this._canvas.initialize();
