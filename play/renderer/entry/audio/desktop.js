@@ -51,8 +51,8 @@ ${error}`));
 
     this.Controls = {
       view({attrs}) {
-        return m('div', {display: 'flex'},
-          m('p', {style: {display: 'flex', margin: '0'}},
+        return m('div', {style: {display: 'flex'}},
+          m('p', {style: {display: 'flex', flex: '1', margin: '0'}},
             m('i', {className: 'material-icons', style: {marginRight: '0.1ch'}},
               'info_outline'),
            'デスクトップ上に流れている音声を可視化します。'),
