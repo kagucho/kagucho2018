@@ -47,14 +47,14 @@ target-play-main: ./node_modules/.bin/webpack play/main
 target-play-renderer: ./node_modules/.bin/webpack play/renderer
 	cd play/renderer && $(abspath node_modules/.bin/webpack)
 
-output/kagucho2017/win32-x64: output/intermediate/electron-v1.6.15-win32-x64.zip app.json
+output/kagucho2017/win32-x64: output/intermediate/electron-v3.0.6-win32-x64.zip app.json
 	mkdir -p $@/resources/app
-	unzip -d $@ output/intermediate/electron-v1.6.15-win32-x64.zip
+	unzip -d $@ output/intermediate/electron-v3.0.6-win32-x64.zip
 	cp app.json $@/resources/app/package.json
 
-output/intermediate/electron-v1.6.15-win32-x64.zip:
+output/intermediate/electron-v3.0.6-win32-x64.zip:
 	mkdir -p $(dir $@)
-	wget -O $@ https://github.com/electron/electron/releases/download/v1.6.15/electron-v1.6.15-win32-x64.zip
+	wget -O $@ https://github.com/electron/electron/releases/download/v3.0.6/electron-v3.0.6-win32-x64.zip
 
 .PHONY: clean distclean lint lint-electron lint-node target-kagucho2017	\
 	target-play target-play-main target-play-renderer watch
