@@ -3,6 +3,19 @@
 kagucho2017 is the template for the disc which will be distributed in Ridaisai,
 the university festival of the Tokyo University Science.
 
+## This branch description
+
+@yumetodo was tried to deploy disk wiith this template on 2017.
+
+This branch has been branched from init commit.
+
+You can create sample disk by following the steps showing below.
+
+1. go to https://github.com/yumetodo/prime_num_searcher/releases
+2. Download `prime_num_searcher.7z` or `prime_num_searcher.zip` and extract to `Kagucho2017/prog/prime_num_searcher`
+3. Follow Preparation section and later
+
+
 ## Development
 
 ### Requirements

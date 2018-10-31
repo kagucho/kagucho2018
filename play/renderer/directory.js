@@ -58,6 +58,19 @@ export default new DirectoryEntry({
       author: 'Prog部',
       entries: [
         new ExecutableEntry({
+          title: 'prime num searcher',
+          author: 'yumetodo',
+          description: '素数の列挙を行うアルゴリズムの評価を行います。',
+          src: '../prog/prime_num_searcher/prime_num_searcher_gui.exe',
+          photos: [
+            {
+              src:'../prog/prime_num_searcher/image.png',
+              w: 746,
+              h: 421,
+            },
+          ],
+        }),
+        new ExecutableEntry({
           title: '電卓',
           author: 'Microsoft',
           description: '攻撃デモでよく見るアレ',
