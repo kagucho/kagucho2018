@@ -15,8 +15,6 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
 module.exports = {
   module: {
     rules: [
@@ -27,6 +25,4 @@ module.exports = {
     ],
   },
   node: {__dirname: false},
-  plugins: process.env.NODE_ENV == 'production' ?
-    [new UglifyJSPlugin({uglifyOptions: {ecma: 8}})] : [],
 };
