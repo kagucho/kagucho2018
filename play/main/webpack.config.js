@@ -20,6 +20,7 @@ const path = require('path');
 
 module.exports = Object.assign({
 	entry: '.',
+    target: 'node',
 	output: {
 		filename: '[name].js',
 		path: path.join(__dirname, '../../output/kagucho2017/play'),
