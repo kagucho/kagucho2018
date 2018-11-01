@@ -16,11 +16,14 @@
 */
 
 module.exports = {
+  target: 'node',
   module: {
     rules: [
       {
         test: /\.(eot|gif|html|jpg|png|svg|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        use: [{
+          loader: 'file-loader'
+        }],
       },
     ],
   },
