@@ -18,7 +18,6 @@
 const commonWebpackConfig = require('../common.webpack.config');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
-const OptimizeCssnanoPlugin = require('@intervolga/optimize-cssnano-plugin');
 
 module.exports = Object.assign({
 	entry: '.',
@@ -35,16 +34,23 @@ module.exports.module.rules.push({
 		fallback: 'style-loader',
 		//TODO: process.env.NODE_ENV doesn't work
 		use: process.env.NODE_ENV == 'production'
-			? new OptimizeCssnanoPlugin({
-				sourceMap: nextSourceMap,
-				cssnanoOptions: {
-					preset: ['default', {
-						discardComments: {
-							removeAll: true
+			? [
+				'css-loader',
+				{
+					loader: 'postcss-loader',
+					options: {
+						plugins: {
+							cssnano: {
+								preset: ['default', {
+									discardComments: {
+										removeAll: true
+									}
+								}]
+							}
 						}
-					}]
+					}
 				}
-			})
+			]
 			: 'css-loader',
 	}),
 });
