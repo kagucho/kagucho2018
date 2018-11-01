@@ -21,6 +21,9 @@ const path = require('path');
 module.exports = Object.assign({
 	entry: '.',
     target: 'node',
+    externals: {
+        electron: 'electron'
+    }
 	output: {
 		filename: '[name].js',
 		path: path.join(__dirname, '../../output/kagucho2017/play'),
