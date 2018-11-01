@@ -20,7 +20,6 @@ const path = require('path');
 
 module.exports = Object.assign({
 	entry: '.',
-    target: 'node',
     externals: {
         electron: 'electron'
     }
