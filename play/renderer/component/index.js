@@ -18,7 +18,7 @@
 import directory from '../../../blob/directory';
 import m from 'mithril';
 import 'material-design-icons/iconfont/material-icons.css';
-import './index.css';
+import './component/index.css';
 
 export default {
   oninit(node) {
