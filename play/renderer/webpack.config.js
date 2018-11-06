@@ -26,8 +26,38 @@ module.exports = Object.assign({
 		path: path.join(__dirname, '../../output/kagucho2017/play/renderer'),
 	},
 	target: 'electron-renderer',
+	module: {
+		rules: [{
+			test: /\.css$/,
+			use: ExtractTextWebpackPlugin.extract({
+				fallback: 'style-loader',
+				//TODO: process.env.NODE_ENV doesn't work
+				use: process.env.NODE_ENV == 'production'
+					? [
+						'css-loader',
+						{
+							loader: 'postcss-loader',
+							options: {
+								plugins: {
+									cssnano: {
+										preset: ['default', {
+											discardComments: {
+												removeAll: true
+											}
+										}]
+									}
+								}
+							}
+						}
+					]
+					: 'css-loader',
+			}),
+		}],
+	},
+	plugins: [new ExtractTextWebpackPlugin('./component/[name].css')]
 }, commonWebpackConfig);
 
+/*
 module.exports.module.rules.push({
 	test: /\.css$/,
 	use: ExtractTextWebpackPlugin.extract({
@@ -54,5 +84,6 @@ module.exports.module.rules.push({
 			: 'css-loader',
 	}),
 });
+*/
 
-module.exports.plugins.push(new ExtractTextWebpackPlugin('[name].css'));
+//module.exports.plugins.push(new ExtractTextWebpackPlugin('[name].css'));
