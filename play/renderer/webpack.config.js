@@ -16,11 +16,15 @@
 */
 
 const commonWebpackConfig = require('../common.webpack.config');
-const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const ExtractTextWebpackPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 
 module.exports = Object.assign({
+	mode: 'production',
 	entry: '.',
+	externals: {
+		elextron: 'electron'
+	},
 	output: {
 		filename: '[name].js',
 		path: path.join(__dirname, '../../output/kagucho2017/play/renderer'),
@@ -29,32 +33,42 @@ module.exports = Object.assign({
 	module: {
 		rules: [{
 			test: /\.css$/,
-			use: ExtractTextWebpackPlugin.extract({
-				fallback: 'style-loader',
-				//TODO: process.env.NODE_ENV doesn't work
-				use: process.env.NODE_ENV == 'production'
-					? [
-						'css-loader',
-						{
-							loader: 'postcss-loader',
-							options: {
-								plugins: {
-									cssnano: {
-										preset: ['default', {
-											discardComments: {
-												removeAll: true
-											}
-										}]
-									}
-								}
-							}
-						}
-					]
-					: 'css-loader',
-			}),
-		}],
+			use : [
+				{
+					loader: ExtractTextWebpackPlugin.loader,
+				},
+				'css-loader',
+			],
+			// use: ExtractTextWebpackPlugin.extract({
+			// 	fallback: 'style-loader',
+			// 	//TODO: process.env.NODE_ENV doesn't work
+			// 	use: process.env.NODE_ENV == 'production'
+			// 		? [
+			// 			'css-loader',
+			// 			{
+			// 				loader: 'postcss-loader',
+			// 				options: {
+			// 					plugins: {
+			// 						cssnano: {
+			// 							preset: ['default', {
+			// 								discardComments: {
+			// 									removeAll: true
+			// 								}
+			// 							}]
+			// 						}
+			// 					}
+			// 				}
+			// 			}
+			// 		]
+			// 		: 'css-loader',
+			// }),
+		},],
 	},
-	plugins: [new ExtractTextWebpackPlugin('./component/[name].css')]
+	plugins: [
+		new ExtractTextWebpackPlugin({
+			filename: '[name].css',
+		}),
+	],
 }, commonWebpackConfig);
 
 /*

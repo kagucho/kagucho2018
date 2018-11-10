@@ -21,7 +21,7 @@ import PhotoSwipeUIDefault from 'photoswipe/dist/photoswipe-ui-default';
 import 'material-design-icons/iconfont/material-icons.css';
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
-import './index.css';
+import './entry/executable/index.css';
 
 const childProcess = require('child_process');
 const path = require('path');
